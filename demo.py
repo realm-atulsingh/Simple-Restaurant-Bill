@@ -8,11 +8,11 @@ class RestaurantBillingSystem:
         self.root.title("Kanpur Restaurant")
         
         self.menu = {
-            "Burger": 5.0,
-            "Pizza": 8.0,
-            "Pasta": 7.0,
-            "Salad": 4.0,
-            "Soda": 1.5,
+            "Burger": 60,
+            "Pizza": 90,
+            "Pasta": 40,
+            "Drink": 70,
+            "Water": 20,
         }
         
         self.order = {}
@@ -37,7 +37,7 @@ class RestaurantBillingSystem:
         self.total_amount_label.pack(side="left")
         
         for item in self.menu:
-            button = tk.Button(self.menu_frame, text=f"{item} (${self.menu[item]:.2f})", command=lambda i=item: self.add_to_order(i))
+            button = tk.Button(self.menu_frame, text=f"{item} (₹{self.menu[item]:.2f})", command=lambda i=item: self.add_to_order(i))
             button.pack(fill="x", padx=5, pady=5)
         
         self.order_label = tk.Label(self.order_frame, text="Your Order:")
@@ -65,16 +65,16 @@ class RestaurantBillingSystem:
         for item, quantity in self.order.items():
             price = self.menu[item]
             total += price * quantity
-            order_summary += f"{item} x{quantity} = ${price * quantity:.2f}\n"
+            order_summary += f"{item} x{quantity} = ₹{price * quantity:.2f}\n"
         
-        order_summary += "\nTotal: ${:.2f}".format(total)
+        order_summary += "\nTotal:  ₹{:.2f}".format(total)
         
         self.total_price.set(total)
         self.order_label.config(text="Your Order:")
         
         messagebox.showinfo("Order Summary", order_summary)
         
-        self.order = {}  # Clear the order
+        self.order = {}  
         
 if __name__ == "__main__":
     root = tk.Tk()
